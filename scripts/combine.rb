@@ -35,9 +35,10 @@ Dir.mktmpdir {|dir|
     files.each_with_index {|file,i|
       f << "\n(start: #{args[i]})\n"
       f << file.read
+      f << %(\nG00 Z2.0000 F3000\n)
       f << "\n(end: #{args[i]})\n"
     }
-    f << %(G0 Z15
+    f << %(G0 Z15 F3000
 M5
 G28
 M30)
