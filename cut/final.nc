@@ -104,6 +104,8 @@ G01 Z-1.7000
 G01 Z0
 G00 Z2.0000
 M5
+G00 Z2.0000 F3000
+
 (end: flatcam/step9-small-holes.nc:T6)
 
 (start: flatcam/step8-oval-cutout.nc:T1)
@@ -406,6 +408,8 @@ G01 X28.2734 Y30.9696
 G01 X28.2745 Y30.9921
 G00 Z2.0000
 M5
+G00 Z2.0000 F3000
+
 (end: flatcam/step8-oval-cutout.nc:T1)
 
 (start: flatcam/step10-big-holes.nc:T1)
@@ -503,6 +507,8 @@ G01 Z-1.7000
 G01 Z0
 G00 Z2.0000
 M5
+G00 Z2.0000 F3000
+
 (end: flatcam/step10-big-holes.nc:T1)
 
 (start: flatcam/step11-cutout.nc:T1)
@@ -1778,8 +1784,10 @@ G01 X51.9850 Y23.6409
 G01 X43.0155 Y23.6409
 G00 Z2.0000
 M5
+G00 Z2.0000 F3000
+
 (end: flatcam/step11-cutout.nc:T1)
-G0 Z15
+G0 Z15 F3000
 M5
 G28
 M30
