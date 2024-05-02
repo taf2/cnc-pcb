@@ -10,7 +10,7 @@
 
 /usr/bin/ruby scripts/post-laser-makera.rb flatcam/step3-top-silk.nc 003 -0.5 0.3
 
-/usr/bin/ruby scripts/post-makera.rb flatcam/step4-align.nc T3
+/usr/bin/ruby scripts/combine.rb cut/step4-align.nc flatcam/step4-align.nc:T3 flatcam/step4x-align.nc:T3
 
 /usr/bin/ruby scripts/post-makera.rb flatcam/step5-bot-iso.nc T2
 
