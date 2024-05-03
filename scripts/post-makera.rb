@@ -1,10 +1,15 @@
 #!/usr/bin/ruby
 tool=ARGV[1] || 'T1'
+
 # you can pass a depth argument with a replacement rule e.g. 0.1366=0.01 will replace all G01 Z0.1366 with G01 Z0.01
 depth=ARGV[2] # 0.1366=0.01
 skip_end=(ARGV[3].to_i == 1)
 skip_start=(ARGV[4].to_i == 1)
 ofile=ARGV[5]
+
+if tool.match?(/:/) # then we're applying a feedrate to the tool
+  tool, feedrate = tool.split(':')
+end
 
 if depth == 'x=y'
   depth = nil
@@ -70,10 +75,23 @@ lines.each {|line|
     if line == 'M05'
       state = 'discard'
       output += end_codes 
-    elsif depths.any? && line.match?(/^G01 Z/)
-      depths.each {|d|
-        line.gsub!(d[:locate], d[:replace])
-      }
+    elsif line.match?(/^G0[0-1] Z+/)
+      zdepth = line.split('Z').last.split(' ').first.to_f
+      if depths.any?
+        depths.each {|d|
+          line.gsub!(d[:locate], d[:replace])
+        }
+      end
+      if feedrate
+        puts "zdepth: #{zdepth.inspect} for #{line.inspect}"
+        if zdepth <= 0
+          # set feedrate slow on negative
+          line += " #{feedrate}"
+        else
+          # set feedrate fast on positive
+          line += " F3000"
+        end
+      end
       output << line
     else
       output << line

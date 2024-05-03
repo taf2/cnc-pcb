@@ -12,10 +12,13 @@
 
 /usr/bin/ruby scripts/combine.rb cut/step4-align.nc flatcam/step4-align.nc:T3 flatcam/step4x-align.nc:T3
 
+/usr/bin/ruby scripts/post-makera.rb flatcam/step4a-align.nc T3:F80
+
 /usr/bin/ruby scripts/post-makera.rb flatcam/step5-bot-iso.nc T2
 
 /usr/bin/ruby scripts/post-makera.rb flatcam/step6-bot-pads.nc T5 0.0000=0.0120
 
 /usr/bin/ruby scripts/post-laser-makera.rb flatcam/step7-bot-silk.nc 003 -0.5 0.3
 
-/usr/bin/ruby scripts/combine.rb cut/final.nc flatcam/step9-small-holes.nc:T6 flatcam/step8-oval-cutout.nc:T1 flatcam/step10-big-holes.nc:T1 flatcam/step11-cutout.nc:T1
+#/usr/bin/ruby scripts/combine.rb cut/final.nc flatcam/step9-small-holes.nc:T6 flatcam/step8-oval-cutout.nc:T1 flatcam/step10-big-holes.nc:T1 flatcam/step11-cutout.nc:T1
+/usr/bin/ruby scripts/combine.rb cut/final.nc flatcam/step9-small-holes.nc:T6 flatcam/step10-big-holes.nc:T1 flatcam/step11-cutout.nc:T1
