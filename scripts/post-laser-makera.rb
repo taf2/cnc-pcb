@@ -7,9 +7,10 @@
 output = []
 state = 'discard'
 input_file = ARGV[0]
-power_level = ARGV[1] || 100 # start with 100 to cutout trace and then 10% to cure mask
-x_offset = ARGV[2].to_f || 0.0 # X offset
-y_offset = ARGV[3].to_f || 0.0 # Y offset
+power_level = (ARGV[1] || 100) # start with 100 to cutout trace and then 10% to cure mask
+x_offset = (ARGV[2] || 0.0).to_f || 0.0 # X offset
+y_offset = (ARGV[3] || 0.0).to_f # Y offset
+speed    = (ARGV[4] || 120).to_i
 
 output_file = input_file.gsub(/flatcam/,'cut')
 puts "reading #{input_file.inspect}"
@@ -56,6 +57,11 @@ File.readlines(input_file).each {|line|
         line.gsub!(/Y[-\d.]+/, "Y#{format('%.4f', y)}") if y
       end
     end
+
+    if speed != 120 && line.match?(/G01 F120.00/)
+      line.gsub!(/G01 F120.00/,"G01 F#{speed}")
+    end
+
     output << line
   end
 }
