@@ -15,6 +15,7 @@ def find_range(filename, axis)
 
   line_count = 0
   File.foreach(filename) do |line|
+    line.strip!
     line_count += 1
     if line.match?(/#{axis.upcase}-?\d+/) && !line.start_with?('%')
       line.scan(/#{axis.upcase}-?\d+/).each do |match|
