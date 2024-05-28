@@ -1,8 +1,10 @@
 # position the pcb center to our 100x70 board
 # in the x axis we want to offset by 15 and in the y we want it centered
 #
-X=52.985
-Y=37.683
+X=$1 #52.985
+Y=$2 #37.683
+echo $X
+echo $Y
 mkdir -p gerber/prepared
 ruby scripts/prepare-drill.rb  gerber/Drill_PTH_Through.DRL gerber/prepared/Drill_PTH_Through.DRL $X $Y
 ruby scripts/prepare-drill.rb  gerber/Drill_PTH_Through_Via.DRL gerber/prepared/Drill_PTH_Through_Via.DRL $X $Y
