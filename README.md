@@ -99,6 +99,26 @@ With our pre-processing steps above the process in flatcam is simplified to the 
     - save as step6-top-pads.nc
     - for pad clearing with cnc save as step7-top-pads.nc
 
-Use the isolation tool on your top layer and bottom layer. (for me 20% overlap) using a 0.1mm v-bit with 60 deg works well.
+9. Drilling small holes
+    - need to split up the drills by size into separte drilling operations so edit excellon file deleting the larger tools. you should have two new excellon's a small-holes and a big-holes. for my example the custom geo holes we'll convert into a few drills
+    - save as step8-small-holes.nc
 
-Use the paint tool for the top silk and bottom silk, using seed and the 0.2mm v-bit 30 deg bit.
+10. Drilling big holes
+    - again edit the original drill excellon and this time delete the small holes.
+    - for the custom oval holes we can add 3 drills of the bigger drill size to create the oval like shape
+    - save as step9-big-holes.nc
+
+11. Final cutout
+    - cutout tool
+    - gap size 1mm
+    - thin
+    - gaps TB (top and bottom)
+
+### Preparing the gcodes for the Carvera
+
+    There a few things we need to adjust before the gcode from Flatcam can run on the Carvera.  First we have to add some initialization gcodes to do this we use the post-makera ruby script.  For the laser operations we also have to adjust the start sequence and replace some codes to operate the laser.  We also have to offset things for the laser to be aligned correctly.  I managed to adjust this by hand after a few failed attempts eye balling with caliper's 
+
+```
+sh scripts/gen.all.sh
+```
+    Running the above will handle running all the files and outputing the ready files into the cut directory where you can finally upload all the files to the machine.
